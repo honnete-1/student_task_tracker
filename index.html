@@ -25,3 +25,53 @@
   <!-- Our custom stylesheet -->
   <link rel="stylesheet" href="style.css" />
 </head>
+
+ <!--  custom stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<!-- The body starts with the light background color from our CSS variables -->
+<body class="min-h-screen">
+
+  <!-- Section 1: floating metallic nav bar
+       Fixed at the top, blurred background, always visible-->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+
+      <!-- Logo / Brand Name -->
+      <div class="flex items-center gap-2.5 flex-shrink-0">
+        <!-- App icon — simple task checkmark SVG -->
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold"
+             style="background: linear-gradient(135deg, #60A5FA, #3B82F6)">
+          ✓
+        </div>
+        <span class="font-grotesk font-700 text-base font-semibold tracking-tight"
+              style="color: var(--text-main)">
+          TaskFlow
+        </span>
+        <!-- This badge updates dynamically via JavaScript -->
+        <span class="task-count-pill hidden sm:flex" id="nav-task-count">0</span>
+      </div>
+
+      <!-- Center: Live Clock (hidden on very small screens) -->
+      <div class="hidden md:block">
+        <span id="live-clock">Loading...</span>
+      </div>
+
+      <!-- Right side: Theme Toggle Button -->
+      <div class="flex items-center gap-3">
+        <!-- Small screen clock -->
+        <span id="live-clock-sm" class="block md:hidden" style="font-family: 'Space Grotesk'; font-size:12px; color:var(--text-sub)"></span>
+
+        <!-- Dark / Light mode toggle -->
+        <!-- The emoji icon changes via JavaScript based on current mode -->
+        <button
+          class="theme-btn"
+          id="theme-toggle"
+          aria-label="Toggle dark mode"
+          title="Toggle theme">
+          🌙
+        </button>
+      </div>
+    </div>
+  </nav>
