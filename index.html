@@ -75,3 +75,57 @@
       </div>
     </div>
   </nav>
+ <!-- main content area-->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 pt-24 pb-16">
+
+
+    <!-- SECTION 2: Cinematic hero bento card with Large banner with main heading and subtitle-->
+    <section id="hero" class="mb-6" aria-label="Hero section">
+      <div class="bento-card p-8 sm:p-10 relative overflow-hidden">
+
+        <!-- Decorative background circle -->
+        <div class="absolute -top-16 -right-16 w-64 h-64 rounded-full opacity-5"
+             style="background: radial-gradient(circle, var(--blue), transparent)">
+        </div>
+
+        <div class="relative z-10">
+
+          <!-- Top badge -->
+          <div class="label-badge mb-5">
+            <span>⚡</span> Student Productivity Dashboard
+          </div>
+
+          <!-- Main Heading with shimmer animation effect -->
+          <h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl mb-4">
+            <span class="shimmer-text">Manage</span>
+            <span style="color: var(--text-main)"> your tasks,</span><br />
+            <span style="color: var(--text-main)">own your </span>
+            <span class="shimmer-text">deadlines.</span>
+          </h1>
+
+          <!-- Subtitle description -->
+          <p class="text-base sm:text-lg max-w-xl leading-relaxed"
+             style="color: var(--text-sub)">
+            A clean, minimal workspace to track assignments, projects, and study
+            goals, so nothing slips through the cracks.
+          </p>
+
+          <!-- Hero bottom bar: quick stats at a glance -->
+          <div class="flex flex-wrap gap-4 mt-8 pt-6"
+               style="border-top: 1px solid var(--border)">
+            <div class="flex items-center gap-2 text-sm" style="color: var(--text-sub)">
+              <span class="priority-dot" style="background:#22D3EE"></span>
+              <span><strong id="hero-upcoming-count" style="color:var(--text-main)">0</strong> upcoming</span>
+            </div>
+            <div class="flex items-center gap-2 text-sm" style="color: var(--text-sub)">
+              <span class="priority-dot" style="background:#FBBF24"></span>
+              <span><strong id="hero-today-count" style="color:var(--text-main)">0</strong> due today</span>
+            </div>
+            <div class="flex items-center gap-2 text-sm" style="color: var(--text-sub)">
+              <span class="priority-dot" style="background:#F87171"></span>
+              <span><strong id="hero-overdue-count" style="color:var(--text-main)">0</strong> overdue</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
