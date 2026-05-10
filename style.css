@@ -1,0 +1,499 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+
+
+:root {
+  /* --- Light Mode: "Liquid Silver" Theme --- */
+  --bg:           #F5F7FA;
+  --surface:      #FFFFFF;
+  --metallic:     #E5E7EB;
+  --border:       #D1D5DB;
+  --silver:       #94A3B8;
+  --blue:         #60A5FA;
+  --text-main:    #111827;
+  --text-sub:     #6B7280;
+
+  /* Shadows for cards in light mode */
+  --shadow-sm:    0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:    0 4px 20px rgba(0,0,0,0.07), 0 2px 8px rgba(0,0,0,0.04);
+  --shadow-lg:    0 10px 40px rgba(0,0,0,0.10);
+
+  /* Card background gradient - gives a subtle metallic feel */
+  --card-bg:      linear-gradient(145deg, #ffffff 0%, #f9fafb 100%);
+}
+
+/* When the <html> element has the class "dark", these override the variables above */
+.dark {
+  /* --- Dark Mode: "Obsidian Titanium" Theme --- */
+  --bg:           #09090B;
+  --surface:      #18181B;
+  --metallic:     #27272A;
+  --border:       #3F3F46;
+  --silver:       #71717A;
+  --blue:         #22D3EE;
+  --text-main:    #FAFAFA;
+  --text-sub:     #A1A1AA;
+
+  /* Darker, deeper shadows for dark mode */
+  --shadow-sm:    0 1px 3px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md:    0 4px 20px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.4);
+  --shadow-lg:    0 10px 40px rgba(0,0,0,0.6);
+
+  /* Dark card gradient */
+  --card-bg:      linear-gradient(145deg, #27272A 0%, #1c1c1f 100%);
+}
+
+
+/* 
+   3. BASE / RESET STYLES
+    */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--text-main);
+  /* Smooth color change when toggling dark mode */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
+/* All headings use the display font */
+h1, h2, h3, h4 {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+
+/* --------------------------------------------------------
+   4. CUSTOM SCROLLBAR
+   Makes the scrollbar look more minimal and modern
+   -------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--silver);
+}
+
+
+/* 
+   5. NAVBAR STYLES
+   Fixed top navigation with a frosted/blurred background
+    */
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.88);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-sm);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+/* Dark mode navbar */
+.dark #navbar {
+  background: rgba(9, 9, 11, 0.88);
+}
+
+
+/* 
+   6. BENTO CARD BASE STYLE
+   Reusable style for all the card components in the layout
+    */
+.bento-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  /* Smooth hover effect */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bento-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+
+/* 
+   7. TASK PRIORITY STYLES
+   Each task card gets a colored left border based on urgency
+    */
+
+/* Overdue: soft red */
+.priority-overdue {
+  border-left: 3px solid #F87171 !important;
+  background: linear-gradient(135deg, rgba(248,113,113,0.05) 0%, var(--surface) 35%) !important;
+}
+.dark .priority-overdue {
+  background: linear-gradient(135deg, rgba(248,113,113,0.09) 0%, var(--metallic) 35%) !important;
+}
+
+/* Due Today: warm amber */
+.priority-today {
+  border-left: 3px solid #FBBF24 !important;
+  background: linear-gradient(135deg, rgba(251,191,36,0.05) 0%, var(--surface) 35%) !important;
+}
+.dark .priority-today {
+  background: linear-gradient(135deg, rgba(251,191,36,0.09) 0%, var(--metallic) 35%) !important;
+}
+
+/* Upcoming: cool cyan */
+.priority-upcoming {
+  border-left: 3px solid #22D3EE !important;
+  background: linear-gradient(135deg, rgba(34,211,238,0.05) 0%, var(--surface) 35%) !important;
+}
+.dark .priority-upcoming {
+  background: linear-gradient(135deg, rgba(34,211,238,0.09) 0%, var(--metallic) 35%) !important;
+}
+
+
+/* --------------------------------------------------------
+   8. FORM INPUT STYLES
+   Custom styled inputs that match the metallic theme
+   -------------------------------------------------------- */
+.form-input {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-main);
+  padding: 11px 14px;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.18);
+}
+
+.dark .form-input:focus {
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.15);
+}
+
+.form-input::placeholder {
+  color: var(--text-sub);
+}
+
+/* Fix the date picker icon color in dark mode */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0.5;
+  cursor: pointer;
+}
+.dark input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.55;
+}
+
+
+/* 9. BUTTON STYLES*/
+
+/* Primary Submit Button */
+.submit-btn {
+  background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+}
+.submit-btn:hover {
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+.submit-btn:active {
+  transform: translateY(0px);
+}
+
+/* In dark mode, switch to cyan accent */
+.dark .submit-btn {
+  background: linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%);
+  color: #09090B;
+  font-weight: 700;
+}
+.dark .submit-btn:hover {
+  background: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%);
+  box-shadow: 0 6px 20px rgba(34, 211, 238, 0.35);
+}
+
+/* Delete Button - subtle outline style */
+.delete-btn {
+  background: transparent;
+  border: 1px solid rgba(248, 113, 113, 0.35);
+  color: #F87171;
+  border-radius: 7px;
+  padding: 5px 13px;
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.delete-btn:hover {
+  background: rgba(248, 113, 113, 0.1);
+  border-color: #F87171;
+  transform: translateY(-1px);
+}
+
+/* Dark Mode Toggle Button */
+.theme-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--metallic);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 17px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+.theme-btn:hover {
+  border-color: var(--blue);
+  background: var(--surface);
+}
+
+
+/* 10. VALIDATION ERROR MESSAGE */
+.error-msg {
+  color: #F87171;
+  font-size: 12px;
+  margin-top: 5px;
+  /* Hidden by default; JavaScript adds class "show" to reveal it */
+  display: none;
+}
+.error-msg.show {
+  display: block;
+}
+
+
+/* 
+   11. TYPOGRAPHY HELPERS
+    */
+
+/* Large hero heading */
+.hero-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--text-main);
+}
+
+/* Stat number in widgets */
+.stat-number {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--text-main);
+}
+
+/* Small uppercase label/badge */
+.label-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-sub);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 3px 10px;
+  background: var(--metallic);
+}
+
+/* Small colored dot used for priority label */
+.priority-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Active task counter badge in navbar */
+.task-count-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 6px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  background: var(--blue);
+  color: white;
+  transition: all 0.25s ease;
+}
+.dark .task-count-pill {
+  color: #09090B;
+}
+
+/* Live clock in navbar */
+#live-clock {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-sub);
+  letter-spacing: 0.04em;
+}
+
+
+/* 12. ANIMATIONS*/
+
+/* Shimmer effect for the hero heading */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, var(--text-main) 20%, var(--silver) 50%, var(--text-main) 80%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 5s linear infinite;
+}
+
+.dark .shimmer-text {
+  background: linear-gradient(90deg, #FAFAFA 20%, #22D3EE 50%, #FAFAFA 80%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 5s linear infinite;
+}
+
+/* Fade in + slide up — used when a task card is added */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.task-enter {
+  animation: fadeInUp 0.3s ease forwards;
+}
+
+/* Shrink + fade out — used before a task card is removed */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+}
+
+.task-exit {
+  animation: fadeOut 0.22s ease forwards;
+}
+
+/* Subtle pulse on the stat numbers when they update */
+@keyframes statPop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+.stat-pop {
+  animation: statPop 0.25s ease;
+}
+
+
+/* 
+   13. EMPTY STATE
+   Shown when there are no tasks yet
+    */
+#empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--text-sub);
+}
+
+#empty-state .empty-icon {
+  font-size: 48px;
+  margin-bottom: 14px;
+  opacity: 0.5;
+}
+
+#empty-state p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
+/* 
+   14. FOOTER
+    */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 24px;
+  text-align: center;
+  color: var(--text-sub);
+  font-size: 13px;
+  background: var(--surface);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+
+/* 
+   15. RESPONSIVE TWEAKS
+    */
+@media (max-width: 640px) {
+  .hero-title {
+    font-size: 2.2rem !important;
+  }
+  .stat-number {
+    font-size: 1.6rem !important;
+  }
+}
