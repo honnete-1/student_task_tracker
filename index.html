@@ -314,3 +314,53 @@
         </div>
       </aside>
 
+<!-- Section 5: task display grid, the Right panel has 2 columns wide on desktop
+           and tasks are rendered here by JavaScript
+            -->
+      <section class="lg:col-span-2" aria-label="Task list" id="task-section">
+
+        <!-- Panel Header -->
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <div class="label-badge mb-2">
+              <span>📌</span> Active Tasks
+            </div>
+            <h2 class="text-lg font-semibold" style="color: var(--text-main)">
+              Your Task Board
+            </h2>
+          </div>
+          <!-- Priority legend -->
+          <div class="hidden sm:flex flex-col gap-1.5 text-right">
+            <div class="flex items-center justify-end gap-1.5 text-xs" style="color: var(--text-sub)">
+              <span class="priority-dot" style="background:#F87171"></span> Overdue
+            </div>
+            <div class="flex items-center justify-end gap-1.5 text-xs" style="color: var(--text-sub)">
+              <span class="priority-dot" style="background:#FBBF24"></span> Due Today
+            </div>
+            <div class="flex items-center justify-end gap-1.5 text-xs" style="color: var(--text-sub)">
+              <span class="priority-dot" style="background:#22D3EE"></span> Upcoming
+            </div>
+          </div>
+        </div>
+
+        <!-- Task grid container: JavaScript dynamically adds task cards here-->
+        <div id="task-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        </div>
+
+        <!-- Empty state is shown when there are no tasks in the list and is hidden once tasks exist-->
+        <div id="empty-state" style="display: flex;" class="bento-card">
+          <div class="empty-icon">🗒️</div>
+          <h3 class="text-base font-semibold mb-1" style="color: var(--text-main)">
+            No tasks yet
+          </h3>
+          <p>
+            Add your first task using the form on the left.<br />
+            Your tasks will be saved automatically.
+          </p>
+        </div>
+
+      </section>
+    </div>
+    <!-- End of main grid -->
+
+  </main>
