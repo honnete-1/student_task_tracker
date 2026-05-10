@@ -45,9 +45,9 @@
 }
 
 
-/* 
+/* --------------------------------------------------------
    3. BASE / RESET STYLES
-    */
+   -------------------------------------------------------- */
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -90,10 +90,10 @@ h1, h2, h3, h4 {
 }
 
 
-/* 
+/* --------------------------------------------------------
    5. NAVBAR STYLES
    Fixed top navigation with a frosted/blurred background
-    */
+   -------------------------------------------------------- */
 #navbar {
   position: fixed;
   top: 0;
@@ -114,10 +114,10 @@ h1, h2, h3, h4 {
 }
 
 
-/* 
+/* --------------------------------------------------------
    6. BENTO CARD BASE STYLE
    Reusable style for all the card components in the layout
-    */
+   -------------------------------------------------------- */
 .bento-card {
   background: var(--card-bg);
   border: 1px solid var(--border);
@@ -133,10 +133,10 @@ h1, h2, h3, h4 {
 }
 
 
-/* 
+/* --------------------------------------------------------
    7. TASK PRIORITY STYLES
    Each task card gets a colored left border based on urgency
-    */
+   -------------------------------------------------------- */
 
 /* Overdue: soft red */
 .priority-overdue {
@@ -166,9 +166,10 @@ h1, h2, h3, h4 {
 }
 
 
-/* 8. FORM INPUT STYLES
+/* --------------------------------------------------------
+   8. FORM INPUT STYLES
    Custom styled inputs that match the metallic theme
-    */
+   -------------------------------------------------------- */
 .form-input {
   background: var(--bg);
   border: 1px solid var(--border);
@@ -206,7 +207,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 
-/* 9. BUTTON STYLES*/
+/* --------------------------------------------------------
+   9. BUTTON STYLES
+   -------------------------------------------------------- */
 
 /* Primary Submit Button */
 .submit-btn {
@@ -285,7 +288,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 
-/* 10. VALIDATION ERROR MESSAGE */
+/* --------------------------------------------------------
+   10. VALIDATION ERROR MESSAGE
+   -------------------------------------------------------- */
 .error-msg {
   color: #F87171;
   font-size: 12px;
@@ -298,9 +303,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 
-/* 
+/* --------------------------------------------------------
    11. TYPOGRAPHY HELPERS
-    */
+   -------------------------------------------------------- */
 
 /* Large hero heading */
 .hero-title {
@@ -375,7 +380,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 
-/* 12. ANIMATIONS*/
+/* --------------------------------------------------------
+   12. ANIMATIONS
+   -------------------------------------------------------- */
 
 /* Shimmer effect for the hero heading */
 @keyframes shimmer {
@@ -445,10 +452,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 
-/* 
+/* --------------------------------------------------------
    13. EMPTY STATE
    Shown when there are no tasks yet
-    */
+   -------------------------------------------------------- */
 #empty-state {
   display: flex;
   flex-direction: column;
@@ -471,9 +478,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 
-/* 
+/* --------------------------------------------------------
    14. FOOTER
-    */
+   -------------------------------------------------------- */
 footer {
   border-top: 1px solid var(--border);
   padding: 28px 24px;
@@ -485,9 +492,9 @@ footer {
 }
 
 
-/* 
+/* --------------------------------------------------------
    15. RESPONSIVE TWEAKS
-    */
+   -------------------------------------------------------- */
 @media (max-width: 640px) {
   .hero-title {
     font-size: 2.2rem !important;
