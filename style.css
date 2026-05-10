@@ -166,10 +166,9 @@ h1, h2, h3, h4 {
 }
 
 
-/* --------------------------------------------------------
-   8. FORM INPUT STYLES
+/* 8. FORM INPUT STYLES
    Custom styled inputs that match the metallic theme
-   -------------------------------------------------------- */
+    */
 .form-input {
   background: var(--bg);
   border: 1px solid var(--border);
