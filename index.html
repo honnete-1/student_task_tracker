@@ -1,25 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" class="light">
-<!--
-  index.html — TaskFlow | Student Task Tracker
-  A responsive Bento Dashboard for managing student tasks.
-  Built with: HTML5, Tailwind CSS (CDN), Vanilla JavaScript
--->
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TaskFlow — Student Task Tracker</title>
   <meta name="description" content="A modern student task tracker to manage your assignments and deadlines." />
 
-  <!-- ================================================
-       Tailwind CSS CDN (Play CDN — no build step needed)
-       We configure it inline right below this script tag
-       ================================================ -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    // Tailwind configuration
-    // Setting darkMode to 'class' means dark mode is toggled
-    // by adding the "dark" class to the <html> element
     tailwind.config = {
       darkMode: 'class',
       theme: {
@@ -37,13 +26,15 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 
+ <!--  custom stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
 <!-- The body starts with the light background color from our CSS variables -->
 <body class="min-h-screen">
 
-  <!-- ====================================================
-       SECTION 1: FLOATING METALLIC NAVBAR
-       Fixed at the top, blurred background, always visible
-       ==================================================== -->
+  <!-- Section 1: floating metallic nav bar
+       Fixed at the top, blurred background, always visible-->
   <nav id="navbar" role="navigation" aria-label="Main navigation">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
 
@@ -84,23 +75,15 @@
       </div>
     </div>
   </nav>
-
-
-  <!-- ====================================================
-       MAIN CONTENT AREA
-       Pushed down with padding-top to clear the fixed navbar
-       ==================================================== -->
+ <!-- main content area-->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 pt-24 pb-16">
 
 
-    <!-- ==================================================
-         SECTION 2: CINEMATIC HERO BENTO CARD
-         Large banner with main heading and subtitle
-         ================================================== -->
+    <!-- SECTION 2: Cinematic hero bento card with Large banner with main heading and subtitle-->
     <section id="hero" class="mb-6" aria-label="Hero section">
       <div class="bento-card p-8 sm:p-10 relative overflow-hidden">
 
-        <!-- Decorative background circle — just a visual accent -->
+        <!-- Decorative background circle -->
         <div class="absolute -top-16 -right-16 w-64 h-64 rounded-full opacity-5"
              style="background: radial-gradient(circle, var(--blue), transparent)">
         </div>
@@ -124,7 +107,7 @@
           <p class="text-base sm:text-lg max-w-xl leading-relaxed"
              style="color: var(--text-sub)">
             A clean, minimal workspace to track assignments, projects, and study
-            goals — so nothing slips through the cracks.
+            goals, so nothing slips through the cracks.
           </p>
 
           <!-- Hero bottom bar: quick stats at a glance -->
@@ -146,12 +129,7 @@
         </div>
       </div>
     </section>
-
-
-    <!-- ==================================================
-         SECTION 3: PRODUCTIVITY STATS WIDGETS
-         Three small bento cards showing task counts
-         ================================================== -->
+<!-- Section 3: productivity stats widgets. I added three small bento cards showing task counts-->
     <section id="stats" class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6"
              aria-label="Task statistics">
 
@@ -167,7 +145,6 @@
           <!-- Icon -->
           <div class="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
                style="background: var(--metallic)">
-            📋
           </div>
         </div>
         <p class="text-xs mt-3" style="color: var(--text-sub)">All active tasks in your list</p>
@@ -183,7 +160,6 @@
           </div>
           <div class="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
                style="background: rgba(251,191,36,0.12)">
-            📅
           </div>
         </div>
         <p class="text-xs mt-3" style="color: var(--text-sub)">Tasks with today's deadline</p>
@@ -199,7 +175,58 @@
           </div>
           <div class="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
                style="background: rgba(248,113,113,0.12)">
-            ⚠️
+          </div>
+        </div>
+        <p class="text-xs mt-3" style="color: var(--text-sub)">Tasks past their due date</p>
+      </div>
+
+    </section>
+<!-- Section 3: productivity stats widgets. I added three small bento cards showing task counts-->
+    <section id="stats" class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6"
+             aria-label="Task statistics">
+
+      <!-- Stat Card 1: Total Tasks -->
+      <div class="bento-card p-5">
+        <div class="flex items-start justify-between">
+          <div>
+            <p class="text-xs font-medium uppercase tracking-widest mb-2"
+               style="color: var(--text-sub)">Total Tasks</p>
+            <!-- This number is updated by updateStats() in script.js -->
+            <p class="stat-number" id="stat-total">0</p>
+          </div>
+          <!-- Icon -->
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
+               style="background: var(--metallic)">
+          </div>
+        </div>
+        <p class="text-xs mt-3" style="color: var(--text-sub)">All active tasks in your list</p>
+      </div>
+
+      <!-- Stat Card 2: Due Today -->
+      <div class="bento-card p-5">
+        <div class="flex items-start justify-between">
+          <div>
+            <p class="text-xs font-medium uppercase tracking-widest mb-2"
+               style="color: var(--text-sub)">Due Today</p>
+            <p class="stat-number" id="stat-today" style="color: #FBBF24">0</p>
+          </div>
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
+               style="background: rgba(251,191,36,0.12)">
+          </div>
+        </div>
+        <p class="text-xs mt-3" style="color: var(--text-sub)">Tasks with today's deadline</p>
+      </div>
+
+      <!-- Stat Card 3: Overdue -->
+      <div class="bento-card p-5">
+        <div class="flex items-start justify-between">
+          <div>
+            <p class="text-xs font-medium uppercase tracking-widest mb-2"
+               style="color: var(--text-sub)">Overdue</p>
+            <p class="stat-number" id="stat-overdue" style="color: #F87171">0</p>
+          </div>
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
+               style="background: rgba(248,113,113,0.12)">
           </div>
         </div>
         <p class="text-xs mt-3" style="color: var(--text-sub)">Tasks past their due date</p>
@@ -207,19 +234,13 @@
 
     </section>
 
-
-    <!-- ==================================================
-         SECTION 4 + 5: MAIN GRID — Form + Task Display
+    <!-- Section 4 and  5: Main grid — Form + Task Display
          On desktop: 1/3 form, 2/3 tasks (side by side)
-         On mobile: stacked vertically
-         ================================================== -->
+         On mobile: stacked vertically-->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
 
-      <!-- ================================================
-           SECTION 4: TASK ENTRY FORM
-           Left panel — 1 column wide on desktop
-           ================================================ -->
+      <!-- Section 4: task entry form, the left panel — 1 column wide on desktop -->
       <aside class="lg:col-span-1">
         <div class="bento-card p-6 sticky top-20">
 
@@ -236,10 +257,7 @@
             </p>
           </div>
 
-          <!-- =======================================
-               THE TASK FORM
-               We use id="task-form" to target it in JS
-               ======================================= -->
+          <!-- The task form, I used id="task-form" to target it in JS -->
           <form id="task-form" novalidate>
 
             <!-- Task Name Field -->
@@ -296,12 +314,9 @@
         </div>
       </aside>
 
-
-      <!-- ================================================
-           SECTION 5: TASK DISPLAY GRID
-           Right panel — 2 columns wide on desktop
-           Tasks are rendered here by JavaScript
-           ================================================ -->
+<!-- Section 5: task display grid, the Right panel has 2 columns wide on desktop
+           and tasks are rendered here by JavaScript
+            -->
       <section class="lg:col-span-2" aria-label="Task list" id="task-section">
 
         <!-- Panel Header -->
@@ -328,19 +343,11 @@
           </div>
         </div>
 
-        <!-- ============================================
-             TASK GRID CONTAINER
-             JavaScript dynamically adds task cards here
-             ============================================ -->
+        <!-- Task grid container: JavaScript dynamically adds task cards here-->
         <div id="task-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <!-- Task cards are injected here by script.js -->
         </div>
 
-        <!-- ============================================
-             EMPTY STATE
-             Shown when there are no tasks in the list
-             Hidden once tasks exist
-             ============================================ -->
+        <!-- Empty state is shown when there are no tasks in the list and is hidden once tasks exist-->
         <div id="empty-state" style="display: flex;" class="bento-card">
           <div class="empty-icon">🗒️</div>
           <h3 class="text-base font-semibold mb-1" style="color: var(--text-main)">
@@ -358,15 +365,11 @@
 
   </main>
 
-
-  <!-- ====================================================
-       FOOTER
-       ==================================================== -->
+  <!-- Footer-->
   <footer role="contentinfo">
     <div class="max-w-7xl mx-auto">
       <p>
-        TaskFlow — Student Task Tracker &nbsp;|&nbsp;
-        Built with HTML5, Tailwind CSS &amp; Vanilla JavaScript
+        &copy; 2026 created by Honnete
       </p>
       <p class="mt-1 text-xs" style="opacity: 0.6">
         Your tasks are stored locally in your browser using Local Storage
@@ -374,8 +377,6 @@
     </div>
   </footer>
 
-
-  <!-- JavaScript — loaded at the end so the HTML is parsed first -->
   <script src="script.js"></script>
 
 </body>
