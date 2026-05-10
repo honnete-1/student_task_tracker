@@ -216,3 +216,190 @@ function renderTaskCard(task) {
   // Hide empty state (there's at least one task now)
   toggleEmptyState();
 }
+/*  8. Delete a task: Finds the task by ID, animates it out, removes it from the array, 
+updates stats, and saves to Local Storage.*/
+function deleteTask(taskId) {
+  const card = document.querySelector(`[data-id="${taskId}"]`);
+
+  if (card) {
+    const cardInner = card.querySelector('.bento-card');
+    if (cardInner) cardInner.classList.add('task-exit');
+
+    // The animation takes 0.22 seconds (220ms) — see style.css
+    setTimeout(function () {
+      card.remove();
+      tasks = tasks.filter(function (task) {
+        return task.id !== taskId;
+      });
+
+      updateStats();
+
+      saveTasksToStorage();
+
+      toggleEmptyState();
+
+    }, 230); 
+  }
+}
+
+
+/* 9. Updating the stats widget/; this part recounts the tasks and updates the stat numbers and
+   the hero section counts whenever tasks change. */
+function updateStats() {
+  const today = getTodayDateString(); // "YYYY-MM-DD"
+
+  let totalCount   = tasks.length;
+  let todayCount   = 0;
+  let overdueCount = 0;
+  let upcomingCount = 0;
+
+  tasks.forEach(function (task) {
+    if (task.date < today) {
+      overdueCount++;
+    } else if (task.date === today) {
+      todayCount++;
+    } else {
+      upcomingCount++;
+    }
+  });
+
+  // Update the three stat cards (with a little pop animation)
+  animateStatUpdate('stat-total',   totalCount);
+  animateStatUpdate('stat-today',   todayCount);
+  animateStatUpdate('stat-overdue', overdueCount);
+
+  // Update the hero section mini stats
+  updateElement('hero-upcoming-count', upcomingCount);
+  updateElement('hero-today-count',    todayCount);
+  updateElement('hero-overdue-count',  overdueCount);
+
+  // Update the navbar task count pill
+  updateElement('nav-task-count', totalCount);
+}
+
+// Updates a stat number with a subtle pop animation
+function animateStatUpdate(elementId, newValue) {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+
+  el.textContent = newValue;
+
+  // Briefly add the pop animation class, then remove it
+  el.classList.remove('stat-pop');
+  // We use setTimeout(0) to allow the browser to re-process the class removal
+  setTimeout(function () {
+    el.classList.add('stat-pop');
+  }, 0);
+}
+function updateElement(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value;
+}
+
+/* 10. Local storage, save, and load: IN this part I erialise our tasks array to a JSON string to save it,
+   and parse it back on load*/
+
+const STORAGE_KEY = 'taskflow-tasks';
+
+function saveTasksToStorage() {
+  const tasksJSON = JSON.stringify(tasks);
+  localStorage.setItem(STORAGE_KEY, tasksJSON);
+}
+function loadTasksFromStorage() {
+  const savedData = localStorage.getItem(STORAGE_KEY);
+
+  // If there's no saved data, there's nothing to load
+  if (savedData === null) {
+    toggleEmptyState();
+    return;
+  }
+
+  // Parse the JSON string back into a JavaScript array
+  try {
+    const savedTasks = JSON.parse(savedData);
+
+    if (!Array.isArray(savedTasks)) return;
+
+    tasks = savedTasks;
+
+    // Render each saved task to the screen
+    tasks.forEach(function (task) {
+      renderTaskCard(task);
+    });
+
+    // I update stats with the loaded data
+    updateStats();
+
+  } catch (error) {
+    // If parsing fails for any reason, just start fresh
+    console.error('Failed to load tasks from storage:', error);
+    tasks = [];
+  }
+
+  toggleEmptyState();
+}
+
+
+/* 11. Helper functions: Small utility functions used throughout the code above*/
+function toggleEmptyState() {
+  const emptyState = document.getElementById('empty-state');
+  if (!emptyState) return;
+
+  if (tasks.length === 0) {
+    emptyState.style.display = 'flex';
+  } else {
+    emptyState.style.display = 'none';
+  }
+}
+
+function getTodayDateString() {
+  const today = new Date();
+  const year  = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0'); 
+  const day   = String(today.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function formatDate(dateString) {
+  const date = new Date(dateString + 'T00:00:00');
+  return date.toLocaleDateString('en-US', {
+    weekday: 'short',
+    month:   'short',
+    day:     'numeric',
+    year:    'numeric'
+  });
+}
+
+function getPriorityInfo(dateString) {
+  const today   = getTodayDateString();
+  const dueDate = dateString;
+
+  if (dueDate < today) {
+    // The due date is in the past
+    return {
+      label:    'Overdue',
+      cssClass: 'priority-overdue',
+      dotColor: '#F87171'  
+    };
+  } else if (dueDate === today) {
+    return {
+      label:    'Due Today',
+      cssClass: 'priority-today',
+      dotColor: '#FBBF24'  // amber
+    };
+  } else {
+    return {
+      label:    'Upcoming',
+      cssClass: 'priority-upcoming',
+      dotColor: '#22D3EE'  // cyan
+    };
+  }
+}
+
+// this escapes HTML special characters in user-provided text and prevents XSS (Cross-Site Scripting) attacks where
+// a user might type HTML/JS code into the task name input
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
