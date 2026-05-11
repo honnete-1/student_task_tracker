@@ -22,11 +22,7 @@
     }
   </script>
 
-  <!-- Our custom stylesheet -->
-  <link rel="stylesheet" href="style.css" />
-</head>
-
- <!--  custom stylesheet -->
+  <!--  custom stylesheet -->
   <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -181,62 +177,9 @@
       </div>
 
     </section>
-<!-- Section 3: productivity stats widgets. I added three small bento cards showing task counts-->
-    <section id="stats" class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6"
-             aria-label="Task statistics">
 
-      <!-- Stat Card 1: Total Tasks -->
-      <div class="bento-card p-5">
-        <div class="flex items-start justify-between">
-          <div>
-            <p class="text-xs font-medium uppercase tracking-widest mb-2"
-               style="color: var(--text-sub)">Total Tasks</p>
-            <!-- This number is updated by updateStats() in script.js -->
-            <p class="stat-number" id="stat-total">0</p>
-          </div>
-          <!-- Icon -->
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
-               style="background: var(--metallic)">
-          </div>
-        </div>
-        <p class="text-xs mt-3" style="color: var(--text-sub)">All active tasks in your list</p>
-      </div>
-
-      <!-- Stat Card 2: Due Today -->
-      <div class="bento-card p-5">
-        <div class="flex items-start justify-between">
-          <div>
-            <p class="text-xs font-medium uppercase tracking-widest mb-2"
-               style="color: var(--text-sub)">Due Today</p>
-            <p class="stat-number" id="stat-today" style="color: #FBBF24">0</p>
-          </div>
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
-               style="background: rgba(251,191,36,0.12)">
-          </div>
-        </div>
-        <p class="text-xs mt-3" style="color: var(--text-sub)">Tasks with today's deadline</p>
-      </div>
-
-      <!-- Stat Card 3: Overdue -->
-      <div class="bento-card p-5">
-        <div class="flex items-start justify-between">
-          <div>
-            <p class="text-xs font-medium uppercase tracking-widest mb-2"
-               style="color: var(--text-sub)">Overdue</p>
-            <p class="stat-number" id="stat-overdue" style="color: #F87171">0</p>
-          </div>
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
-               style="background: rgba(248,113,113,0.12)">
-          </div>
-        </div>
-        <p class="text-xs mt-3" style="color: var(--text-sub)">Tasks past their due date</p>
-      </div>
-
-    </section>
-
-    <!-- Section 4 and  5: Main grid — Form + Task Display
-         On desktop: 1/3 form, 2/3 tasks (side by side)
-         On mobile: stacked vertically-->
+    <!-- Section 4 and  5: Main grid — Form + Task Display: On desktop: 1/3 form, 2/3 tasks (side by side)
+     On mobile: stacked vertically-->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
 
